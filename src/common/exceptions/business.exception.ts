@@ -1,10 +1,10 @@
-import { HttpException, HttpStatus } from "@nestjs/common";
-import { BUSINESS_ERROR_CODE } from "./business.error.codes";
+import { HttpException, HttpStatus } from '@nestjs/common';
+import { BUSINESS_ERROR_CODE } from './business.error.codes';
 
 type BusinessError = {
   code: number;
-  message: string
-}
+  message: string;
+};
 
 export class BussinessException extends HttpException {
   constructor(err: BusinessError | string) {
@@ -12,15 +12,15 @@ export class BussinessException extends HttpException {
       err = {
         code: BUSINESS_ERROR_CODE.COMMON,
         message: err,
-      }
+      };
     }
-    super(err, HttpStatus.OK)
+    super(err, HttpStatus.OK);
   }
 
   static throwForbidden() {
     throw new BussinessException({
       code: BUSINESS_ERROR_CODE.ACCESS_FORBIDDEN,
-      message: '抱歉哦，您无此权限！'
-    })
+      message: '抱歉哦，您无此权限！',
+    });
   }
 }

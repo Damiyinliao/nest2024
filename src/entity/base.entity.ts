@@ -1,25 +1,29 @@
-import { PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import {
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export class BaseEntity {
   @PrimaryGeneratedColumn() // 自增长列
   id?: string;
   @CreateDateColumn({
     comment: '创建时间',
-    type: 'timestamp'
+    type: 'timestamp',
   })
   createTime: Date;
   @UpdateDateColumn({
     comment: '更新时间',
-    type: 'timestamp'    
+    type: 'timestamp',
   })
   updateTime: Date;
-  
+
   toJSON() {
     const { createTime, updateTime, ...other } = this;
     return {
       ...other,
       createTime: this.formatDate(createTime),
-      updateTime: this.formatDate(updateTime)
+      updateTime: this.formatDate(updateTime),
     };
   }
 

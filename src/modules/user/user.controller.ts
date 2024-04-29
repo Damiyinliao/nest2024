@@ -1,10 +1,9 @@
-
-import { Body, Controller, Get, Post, Version } from "@nestjs/common";
-import { UserService } from "./user.service";
+import { Body, Controller, Get, Post, Version } from '@nestjs/common';
+import { UserService } from './user.service';
 
 @Controller({
   path: 'user',
-  version: '1'
+  version: '1',
 })
 export class UserController {
   constructor(private readonly userService: UserService) {}
