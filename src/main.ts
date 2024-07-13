@@ -6,6 +6,7 @@ import {
 import { AppModule } from './app.module';
 import { PORT } from './constant';
 import { VERSION_NEUTRAL, VersioningType } from '@nestjs/common';
+import { Logger } from 'nestjs-pino';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
 import { AllExceptionsFilter } from './common/exceptions/base.exception.filter';
 import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
@@ -13,9 +14,13 @@ import { HttpExceptionFilter } from './common/exceptions/http.exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter({
+      logger: true,
+    }),
+    { bufferLogs: true },
   );
-
+  // Logger
+  app.useLogger(app.get(Logger));
   // 接口版本控制
   app.enableVersioning({
     defaultVersion: '1',

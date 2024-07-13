@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 /** 添加mysql */
 import { TypeOrmModule } from '@nestjs/typeorm';
+/** logger */
+import { LoggerModule } from 'nestjs-pino';
 import { User } from './entity/user.entity';
 /** 添加user模块 */
 import { UserModule } from './modules/user/user.module';
@@ -11,6 +13,8 @@ import { FilmModule } from './modules/film/film.module';
 
 @Module({
   imports: [
+    /** Logger */
+    LoggerModule.forRoot(),
     /** mysql */
     TypeOrmModule.forRoot({
       type: 'mysql',
